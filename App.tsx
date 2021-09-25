@@ -10,6 +10,8 @@
 
 import React from 'react';
 import {
+  ActivityIndicator,
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -20,6 +22,11 @@ import {
 } from 'react-native';
 
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
+// import ScreenA from './screens/ScreenA';
+// import ScreenB from './screens/ScreenB';
+
+const ScreenA = React.lazy(() => import('./screens/ScreenA'));
+const ScreenB = React.lazy(() => import('./screens/ScreenB'));
 
 const Section: React.FC<{
   title: string;
@@ -56,23 +63,52 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const [showA, setShowA] = React.useState(false);
+  const [showB, setShowB] = React.useState(false);
+
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={{height: '100%'}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Repack Enabled">
-            This app uses Webpack as the bundler instead of Metro (via
-            @callstack/repack).
-          </Section>
-        </View>
-      </ScrollView>
+      {!showA && !showB && (
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={backgroundStyle}>
+          <Header />
+          <View
+            style={{
+              backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            }}>
+            <Section title="Repack Enabled">
+              This app uses Webpack as the bundler instead of Metro (via
+              @callstack/repack).
+            </Section>
+            <Section title="Lazy Loading">
+              <View>
+                <Button onPress={() => setShowA(true)} title="Screen A" />
+                <Button onPress={() => setShowB(true)} title="Screen B" />
+              </View>
+            </Section>
+          </View>
+        </ScrollView>
+      )}
+      {showA && (
+        <React.Suspense fallback={<ActivityIndicator />}>
+          <ScreenA
+            title="Screen A"
+            body="This is variant A of a screen"
+            onClose={() => setShowA(false)}
+          />
+        </React.Suspense>
+      )}
+      {showB && (
+        <React.Suspense fallback={<ActivityIndicator />}>
+          <ScreenB
+            title="Screen B"
+            body="This is variant B of a screen"
+            onClose={() => setShowB(false)}
+          />
+        </React.Suspense>
+      )}
     </SafeAreaView>
   );
 };
