@@ -1,5 +1,7 @@
 PODS:
   - boost-for-react-native (1.63.0)
+  - callstack-repack (2.2.0):
+    - React-Core
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.65.1)
@@ -338,6 +340,7 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
+  - "callstack-repack (from `../node_modules/@callstack/repack`)"
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -409,6 +412,8 @@ SPEC REPOS:
     - YogaKit
 
 EXTERNAL SOURCES:
+  callstack-repack:
+    :path: "../node_modules/@callstack/repack"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -468,6 +473,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  callstack-repack: 972f26bfee90af10c478cf6004f87641b99beaa1
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: 33c82491102f20ecddb6c6a2c273696ace3191e0
