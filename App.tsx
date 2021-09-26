@@ -8,6 +8,7 @@
  * @format
  */
 
+import { ChunkManager } from '@callstack/repack/dist/client/chunks-api/ChunkManager';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -65,7 +66,7 @@ const App = () => {
 
   const [showA, setShowA] = React.useState(false);
   const [showB, setShowB] = React.useState(false);
-
+  
   return (
     <SafeAreaView style={{height: '100%'}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
